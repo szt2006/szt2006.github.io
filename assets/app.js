@@ -17,12 +17,23 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderMath);
   else renderMath();
 
-  // 2) 移动端侧栏开关
+  // 2) 移动端侧栏开关（抽屉 + 半透明遮罩）
   var toggle = document.getElementById('menuToggle');
   var sidebar = document.getElementById('sidebar');
   if (toggle && sidebar) {
-    toggle.addEventListener('click', function () { sidebar.classList.toggle('open'); });
-    sidebar.addEventListener('click', function (e) { if (e.target.tagName === 'A') sidebar.classList.remove('open'); });
+    var overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+    var closeSb = function () {
+      sidebar.classList.remove('open');
+      document.body.classList.remove('sb-open');
+    };
+    toggle.addEventListener('click', function () {
+      sidebar.classList.toggle('open');
+      document.body.classList.toggle('sb-open');
+    });
+    overlay.addEventListener('click', closeSb);
+    sidebar.addEventListener('click', function (e) { if (e.target.tagName === 'A') closeSb(); });
   }
 
   // 2b) 桌面端：收起 / 展开整条目录

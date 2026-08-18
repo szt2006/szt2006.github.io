@@ -126,7 +126,7 @@ a:hover { text-decoration: underline; }
 .pill--docs:hover { text-decoration: none; filter: brightness(1.06); }
 .docs-pop {
   position: absolute; top: calc(100% + 8px); right: 0; z-index: 60;
-  min-width: 168px; background: var(--panel); border: 1px solid var(--line);
+  min-width: 168px; max-width: calc(100vw - 24px); background: var(--panel); border: 1px solid var(--line);
   border-radius: 10px; box-shadow: var(--shadow); padding: 6px;
   display: flex; flex-direction: column; gap: 2px;
 }
@@ -462,9 +462,19 @@ a:hover { text-decoration: underline; }
   .sky-cards { grid-template-columns: 1fr; }
   .home-stats { grid-template-columns: repeat(2, 1fr); }
   .part-cards { grid-template-columns: 1fr; }
-  /* 窄屏：仅留化学 + B站 胶囊，物理/生物收起 */
-  .pill--off { display: none; }
+  /* 窄屏顶栏精简：只留 brand + 在线文档 + 搜索 + ☰；化学/物理/生物/B站胶囊收起 */
+  .pill--on, .pill--off, .pill--bili { display: none; }
   .brand .brand-sub { display: none; }
+  .sl-text { display: none; }
+  .search-link { font-size: 16px; padding: 8px; }
+  /* 侧栏抽屉遮罩 */
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(8, 12, 24, .42); z-index: 24; }
+  body.sb-open .sidebar-overlay { display: block; }
+  body.sb-open { overflow: hidden; }
+  /* 面包屑换行友好 + 分页触控热区 */
+  .breadcrumb { line-height: 1.8; }
+  .pager a { padding: 14px 16px; font-size: 14.5px; }
+  .docs-pop a { padding: 10px 12px; font-size: 14px; }
 }
 
 /* =========================================================
