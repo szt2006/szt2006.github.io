@@ -112,6 +112,30 @@ a:hover { text-decoration: underline; }
 .pill--bili svg { width: 10px; height: 10px; }
 .pill--bili:hover { color: var(--brand); text-decoration: none; }
 .pill--bili:hover svg { color: var(--gold); }
+/* 在线文档下拉（顶栏，零 JS 的 details/summary） */
+.docs-menu { position: relative; }
+.docs-menu summary { list-style: none; cursor: pointer; user-select: none; }
+.docs-menu summary::-webkit-details-marker { display: none; }
+.docs-menu .arrow { font-size: 10px; margin-left: 3px; opacity: .75; }
+.pill--docs {
+  background: color-mix(in srgb, var(--gold) 12%, transparent);
+  color: var(--gold); border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent);
+  font-weight: 600;
+}
+.pill--docs svg { width: 11px; height: 13px; flex-shrink: 0; }
+.pill--docs:hover { text-decoration: none; filter: brightness(1.06); }
+.docs-pop {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 60;
+  min-width: 168px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; box-shadow: var(--shadow); padding: 6px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.docs-pop a {
+  font-size: 13px; padding: 7px 10px; border-radius: 7px; color: var(--ink);
+  display: flex; align-items: center; gap: 6px; white-space: nowrap;
+}
+.docs-pop a:hover { background: var(--brand-soft); color: var(--brand); text-decoration: none; }
+.docs-pop a svg { color: var(--gold); flex-shrink: 0; }
 
 .top-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
 .search-link { font-size: 15px; display: inline-flex; align-items: center; gap: 5px; }
@@ -295,6 +319,27 @@ a:hover { text-decoration: underline; }
 .beacon--off { opacity: .6; border-style: dashed; }
 .beacon--off .b-star { color: var(--muted); }
 .beacon--off .b-name, .beacon--off .b-state { color: var(--muted); }
+/* 学科卡内按钮：站内版 + 金山在线文档 */
+.beacon .b-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+.beacon .b-site, .beacon .b-doc {
+  font-size: 12px; padding: 5px 12px; border-radius: 999px; border: 1px solid;
+  display: inline-flex; align-items: center; gap: 4px; line-height: 1; white-space: nowrap;
+}
+.beacon .b-site {
+  background: var(--brand-soft); color: var(--brand); font-weight: 600;
+  border-color: color-mix(in srgb, var(--brand) 25%, transparent);
+}
+.beacon .b-doc {
+  background: color-mix(in srgb, var(--gold) 13%, transparent); color: var(--gold);
+  border-color: color-mix(in srgb, var(--gold) 40%, transparent);
+}
+.beacon .b-doc svg { width: 9px; height: 9px; flex-shrink: 0; }
+.beacon .b-site:hover, .beacon .b-doc:hover { text-decoration: none; filter: brightness(1.05); }
+.beacon--off .b-links { opacity: 1; }
+.beacon--off .b-doc {
+  background: color-mix(in srgb, var(--gold) 18%, transparent);
+  border-color: color-mix(in srgb, var(--gold) 55%, transparent);
+}
 /* B 站旁注 */
 .bili-note {
   text-align: center; margin: 18px auto 6px; font-size: 12.5px; color: var(--muted);
