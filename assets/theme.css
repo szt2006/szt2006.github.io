@@ -316,7 +316,7 @@ a:hover { text-decoration: underline; }
 .beacon--on .b-state { color: var(--gold); }
 .beacon--on:hover { transform: translateY(-2px); }
 /* 待刻（物理/生物）*/
-.beacon--off { opacity: .6; border-style: dashed; }
+.beacon--off { border-style: dashed; }
 .beacon--off .b-star { color: var(--muted); }
 .beacon--off .b-name, .beacon--off .b-state { color: var(--muted); }
 /* 学科卡内按钮：站内版 + 金山在线文档 */
