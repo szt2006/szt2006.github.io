@@ -44,6 +44,31 @@
     });
   }
 
+  // 2c) 音乐浮窗（右下角）
+  var mdDock = document.getElementById('musicDock');
+  var mdFab = document.getElementById('mdFab');
+  var mdPrev = document.getElementById('mdPrev');
+  var mdNext = document.getElementById('mdNext');
+  var mdClose = document.getElementById('mdClose');
+  var mdFrame = document.getElementById('mdFrame');
+  var mdList = window.MUSIC_LIST && window.MUSIC_LIST.length ? window.MUSIC_LIST : [{ name: '', id: '110761' }];
+  var mdIdx = 0;
+  if (mdDock && mdFab) {
+    var mdOpen = function (open) { mdDock.setAttribute('data-open', open ? 'true' : 'false'); };
+    mdOpen(false);
+    mdFab.addEventListener('click', function () {
+      mdOpen(mdDock.getAttribute('data-open') !== 'true');
+    });
+    if (mdClose) mdClose.addEventListener('click', function () { mdOpen(false); });
+    var mdLoad = function () {
+      if (!mdFrame) return;
+      var m = mdList[mdIdx % mdList.length];
+      mdFrame.src = 'https://music.163.com/outchain/player?type=2&id=' + m.id + '&auto=0&height=66';
+    };
+    if (mdPrev) mdPrev.addEventListener('click', function () { mdIdx = (mdIdx - 1 + mdList.length) % mdList.length; mdLoad(); });
+    if (mdNext) mdNext.addEventListener('click', function () { mdIdx = (mdIdx + 1) % mdList.length; mdLoad(); });
+  }
+
   // 3) 图片灯箱
   var lb = document.createElement('div');
   lb.id = 'lightbox';

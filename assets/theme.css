@@ -478,6 +478,39 @@ a:hover { text-decoration: underline; }
 }
 
 /* =========================================================
+   音乐浮窗（右下角）
+   ========================================================= */
+.music-dock { position: fixed; right: 18px; bottom: 18px; z-index: 40; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.music-dock[data-open="false"] .md-panel { display: none; }
+.md-fab {
+  width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
+  background: var(--panel); color: var(--gold);
+  border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  box-shadow: var(--shadow); font-size: 19px;
+  display: flex; align-items: center; justify-content: center;
+}
+.md-fab:hover { transform: translateY(-2px); }
+.md-panel {
+  width: 300px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 14px; box-shadow: var(--shadow); padding: 10px 10px 6px;
+}
+.md-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.md-title { font-size: 13px; color: var(--ink); font-weight: 600; }
+.md-actions { display: flex; gap: 4px; }
+.md-btn {
+  background: transparent; border: 1px solid var(--line); border-radius: 8px;
+  width: 28px; height: 26px; font-size: 12px; cursor: pointer; color: var(--muted); line-height: 1;
+}
+.md-btn:hover { color: var(--brand); border-color: var(--gold); }
+.md-frame { width: 100%; height: 66px; border: 0; border-radius: 8px; display: block; }
+@media (max-width: 768px) {
+  .music-dock { right: 0; bottom: 0; left: 0; align-items: stretch; gap: 0; }
+  .music-dock[data-open="false"] { left: auto; right: 12px; bottom: 12px; }
+  .md-fab { width: 42px; height: 42px; }
+  .md-panel { width: 100%; border-radius: 14px 14px 0 0; }
+}
+
+/* =========================================================
    5. 动效（克制）
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
