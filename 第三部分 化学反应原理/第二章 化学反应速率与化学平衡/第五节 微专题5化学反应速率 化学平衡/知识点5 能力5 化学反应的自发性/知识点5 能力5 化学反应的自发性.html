@@ -1,7 +1,7 @@
 <!doctype html><html lang="zh-CN"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>知识点5 能力5 化学反应的自发性 · szt·blog</title>
-<link rel="stylesheet" href="/assets/theme.css?v=1787117786333">
+<link rel="stylesheet" href="/assets/theme.css?v=1787118170830">
 <link rel="stylesheet" href="/assets/katex/katex.min.css">
 </head><body>
 <header class="topbar">
@@ -91,21 +91,25 @@
 <div class="music-dock" id="musicDock" data-open="false">
   <div class="md-panel" id="mdPanel">
     <div class="md-head">
-      <span class="md-title">♪ 复习 BGM</span>
+      <span class="md-title" id="mdName">♪ 你好，世界！ - 徵羽摩柯</span>
       <span class="md-actions">
         <button class="md-btn" id="mdPrev" title="上一首">⏮</button>
+        <button class="md-btn md-play" id="mdPlay" title="播放 / 暂停">▶</button>
         <button class="md-btn" id="mdNext" title="下一首">⏭</button>
         <button class="md-btn" id="mdClose" title="收起">✕</button>
       </span>
     </div>
-    <iframe class="md-frame" id="mdFrame" title="网易云音乐播放器"
-      src="https://music.163.com/outchain/player?type=2&id=3950692&auto=0&height=66"
-      frameborder="no" border="0" marginwidth="0" marginheight="0" allow="autoplay"></iframe>
+    <div class="md-track">
+      <input class="md-progress" id="mdProg" type="range" min="0" max="100" value="0" step="0.1" aria-label="播放进度">
+      <span class="md-time" id="mdTime">0:00 / 0:00</span>
+    </div>
+    <audio id="mdAudio" preload="none"
+      src="https://music.163.com/song/media/outer/url?id=1300936430.mp3"></audio>
   </div>
   <button class="md-fab" id="mdFab" aria-label="播放 / 收起音乐" title="音乐播放器">♪</button>
-  <script>window.MUSIC_LIST=[{"name":"Loveletter To You（情书） - Bandari","id":"3950692"}];</script>
+  <script>window.MUSIC_LIST=[{"name":"你好，世界！ - 徵羽摩柯","id":"1300936430"}];</script>
 </div>
 <script src="/assets/katex/katex.min.js"></script>
 <script src="/assets/katex/contrib/auto-render.min.js"></script>
-<script src="/assets/app.js?v=1787117786333"></script>
+<script src="/assets/app.js?v=1787118170830"></script>
 </body></html>

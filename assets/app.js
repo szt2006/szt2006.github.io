@@ -44,14 +44,18 @@
     });
   }
 
-  // 2c) 音乐浮窗（右下角）
+  // 2c) 音乐浮窗（右下角，HTML5 audio 自建播放器）
   var mdDock = document.getElementById('musicDock');
   var mdFab = document.getElementById('mdFab');
   var mdPrev = document.getElementById('mdPrev');
   var mdNext = document.getElementById('mdNext');
+  var mdPlay = document.getElementById('mdPlay');
   var mdClose = document.getElementById('mdClose');
-  var mdFrame = document.getElementById('mdFrame');
-  var mdList = window.MUSIC_LIST && window.MUSIC_LIST.length ? window.MUSIC_LIST : [{ name: '', id: '110761' }];
+  var mdAudio = document.getElementById('mdAudio');
+  var mdName = document.getElementById('mdName');
+  var mdProg = document.getElementById('mdProg');
+  var mdTime = document.getElementById('mdTime');
+  var mdList = window.MUSIC_LIST && window.MUSIC_LIST.length ? window.MUSIC_LIST : [{ name: '', id: '1300936430' }];
   var mdIdx = 0;
   if (mdDock && mdFab) {
     var mdOpen = function (open) { mdDock.setAttribute('data-open', open ? 'true' : 'false'); };
@@ -60,13 +64,39 @@
       mdOpen(mdDock.getAttribute('data-open') !== 'true');
     });
     if (mdClose) mdClose.addEventListener('click', function () { mdOpen(false); });
-    var mdLoad = function () {
-      if (!mdFrame) return;
-      var m = mdList[mdIdx % mdList.length];
-      mdFrame.src = 'https://music.163.com/outchain/player?type=2&id=' + m.id + '&auto=0&height=66';
+    var mdFmt = function (s) {
+      if (!isFinite(s)) return '0:00';
+      var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
     };
-    if (mdPrev) mdPrev.addEventListener('click', function () { mdIdx = (mdIdx - 1 + mdList.length) % mdList.length; mdLoad(); });
-    if (mdNext) mdNext.addEventListener('click', function () { mdIdx = (mdIdx + 1) % mdList.length; mdLoad(); });
+    var mdLoad = function (autoplay) {
+      var m = mdList[mdIdx % mdList.length];
+      if (mdName) mdName.textContent = '♪ ' + m.name;
+      if (mdAudio) {
+        mdAudio.src = 'https://music.163.com/song/media/outer/url?id=' + m.id + '.mp3';
+        if (autoplay) { var p = mdAudio.play(); if (p) p.catch(function () {}); }
+      }
+    };
+    if (mdAudio) {
+      mdAudio.addEventListener('play', function () { if (mdPlay) mdPlay.textContent = '⏸'; });
+      mdAudio.addEventListener('pause', function () { if (mdPlay) mdPlay.textContent = '▶'; });
+      mdAudio.addEventListener('ended', function () { mdIdx = (mdIdx + 1) % mdList.length; mdLoad(true); });
+      mdAudio.addEventListener('timeupdate', function () {
+        if (mdAudio.duration) {
+          if (mdProg) mdProg.value = mdAudio.currentTime / mdAudio.duration * 100;
+          if (mdTime) mdTime.textContent = mdFmt(mdAudio.currentTime) + ' / ' + mdFmt(mdAudio.duration);
+        }
+      });
+    }
+    if (mdPlay) mdPlay.addEventListener('click', function () {
+      if (mdAudio.paused) { var p = mdAudio.play(); if (p) p.catch(function () {}); }
+      else mdAudio.pause();
+    });
+    if (mdProg) mdProg.addEventListener('input', function () {
+      if (mdAudio && mdAudio.duration) mdAudio.currentTime = mdProg.value / 100 * mdAudio.duration;
+    });
+    if (mdPrev) mdPrev.addEventListener('click', function () { mdIdx = (mdIdx - 1 + mdList.length) % mdList.length; mdLoad(true); });
+    if (mdNext) mdNext.addEventListener('click', function () { mdIdx = (mdIdx + 1) % mdList.length; mdLoad(true); });
   }
 
   // 3) 图片灯箱

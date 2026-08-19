@@ -502,7 +502,10 @@ a:hover { text-decoration: underline; }
   width: 28px; height: 26px; font-size: 12px; cursor: pointer; color: var(--muted); line-height: 1;
 }
 .md-btn:hover { color: var(--brand); border-color: var(--gold); }
-.md-frame { width: 100%; height: 66px; border: 0; border-radius: 8px; display: block; }
+.md-play { width: 32px; color: var(--gold); border-color: color-mix(in srgb, var(--gold) 40%, transparent); font-size: 13px; }
+.md-track { display: flex; align-items: center; gap: 8px; padding: 2px 2px 4px; }
+.md-progress { flex: 1; height: 4px; accent-color: var(--gold); cursor: pointer; }
+.md-time { font-size: 11px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
 @media (max-width: 768px) {
   .music-dock { right: 0; bottom: 0; left: 0; align-items: stretch; gap: 0; }
   .music-dock[data-open="false"] { left: auto; right: 12px; bottom: 12px; }
